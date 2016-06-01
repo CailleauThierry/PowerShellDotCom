@@ -1,7 +1,6 @@
 ﻿<#	
 	.NOTES
 	===========================================================================
-	 Created with: 	SAPIEN Technologies, Inc., PowerShell Studio 2016 v5.2.122
 	 Created on:   	5/30/2016 5:09 PM
 	 Created by:   	Powershell.com <yourpowertip@powershell.com>
 	 Organization: 	Private
@@ -10,17 +9,45 @@
 	.DESCRIPTION
 		A description of the file. Does not work in Posh v2 64-bits
 #>
-$path = "$env:windir\logs\cbs\"
+#requires -Version 3 
+#Requires -RunAsAdministrator 
+# must run with admin privileges! 
 
-$space = Get-ChildItem -Path $path -Filter cbspersist*.cab -File |
-Measure-Object -Property Length -Sum |
-Select-Object -Property Count, Sum
 
-'{0} backed up log files eat up {0:n1} MB' -f $space.Count, ($space.Sum/1MB)
+# use an ordered hash table to store logging info 
+$sizes = [Ordered]@{ }
+
+
+
+Get-ChildItem -Path $env:windir\logs\cbs\ -Filter *.cab |
+ForEach-Object {
+	try
+	{
+		$fileSize = $_.Length
+		# ATTENTION: REMOVE -WHATIF AT OWN RISK
+		# WILL DELETE FILES AND RETRIEVE STORAGE SPACE
+		# ONLY AFTER YOU REMOVED -WHATIF
+		Remove-Item -Path $_.FullName -ErrorAction SilentlyContinue -WhatIf
+		$sizes['Retrieved'] += $fileSize
+	}
+	catch { }
+}
+
+# turn bytes into MB 
+$Sizes['RetrievedMB'] = [Math]::Round(($Sizes['Retrieved']/1MB), 1)
+
+New-Object -TypeName PSObject -Property $sizes
 
 #>> Running (Get-FatLogs.ps1) Script...
 #>> Platform: V5 64Bit
-#2 backed up log files eat up 2.0 MB
+#What if: Performing the operation "Remove File" on target "C:\windows\logs\cbs\CbsPersist_20160526053632.cab".
+#What if: Performing the operation "Remove File" on target "C:\windows\logs\cbs\CbsPersist_20160526222458.cab".
 #
-#>> Execution time: 00:00:03
+#Retrieved RetrievedMB
+#--------- -----------
+#4614859         4.4
+#
+#
+#
+#>> Execution time: 00:00:01
 #>> Script Ended
