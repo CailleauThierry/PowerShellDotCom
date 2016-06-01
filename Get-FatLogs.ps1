@@ -20,6 +20,5 @@ Select-Object -Property Count, Sum
 #>> Running (Get-FatLogs.ps1) Script...
 #>> Platform: V5 64Bit
 #2 backed up log files eat up 2.0 MB
-#
 #>> Execution time: 00:00:03
 #>> Script Ended
