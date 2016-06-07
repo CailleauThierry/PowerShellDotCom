@@ -1,1 +1,2 @@
-.psproj
+*.psproj
+*.TempPoint.ps1
