@@ -1,7 +1,7 @@
 ﻿<#	
 	.NOTES
 	===========================================================================
-	 Created with: 	Created : 	Powershell.com <yourpowertip@powershell.com>
+	 Posted by : 	Powershell.com <yourpowertip@powershell.com>
 	 Created on:   	6/7/2016 4:55 PM
 	 Created by:   	CailleauThierry
 	 Organization: 	Private
