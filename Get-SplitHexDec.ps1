@@ -25,5 +25,5 @@
  
 ('00A1B26A7E100009' -split '(?<=\G[A-Fa-f0-9]{2})(?=.)').Foreach{[Convert]::ToInt32($_, 16)}
 
-# me: there was a typo in the "{2}" and "{5}" those can't ahve spaces in them
+# me: there was a typo in the "{2}" and "{5}" those can't have spaces in them
 # note: sounds line .NET take the /g (global) regex option implicitly
