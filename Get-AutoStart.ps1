@@ -60,6 +60,24 @@ Get-CimInstance -ClassName Win32_StartupCommand | Select-Object -Property Name, 
 #
 #Name        : CLCL - Shortcut
 #Location    : Startup
-#User        : SSV\TCailleau
+#User        : DOMAIN\TCailleau
 #Command     : CLCL - Shortcut.lnk
 #Description : CLCL - Shortcut
+
+# me: tested on PS 3 (64-bits)
+#>> Running (Get-AutoStart.ps1) Script...
+#>> Platform: V3 64Bit (STA)
+#
+#
+#Name        : VMware User Process
+#Location    : HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
+#User        : Public
+#Command     : "C:\Program Files\VMware\VMware Tools\vmtoolsd.exe" -n vmusr
+#Description : VMware User Process
+#
+#
+#
+#
+#>> Execution time: 00:00:01
+#>> Script Ended
+
