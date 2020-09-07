@@ -8,7 +8,7 @@
 	 Filename:     	Get-InstalledAV.ps1
 	===========================================================================
 	.DESCRIPTION
-		A PowerShell one-liner can help you identify the antivirus product installed on a Windows box:
+	A PowerShell one-liner can help you identify the antivirus product installed on a Windows box:
 PS> Get-CimInstance -Namespace root/SecurityCenter2 -ClassName AntiVirusProduct  
 Add the -ComputerName parameter to query remote systems.
 Note that this line returns only antivirus products that properly registered. The result looks similar to this and provides you with AV product and install location:
