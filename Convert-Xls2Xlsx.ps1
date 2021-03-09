@@ -57,7 +57,6 @@ Here is a simple PowerShell function that takes an old .xls Word Excel Sheet, co
        $doc = $excelsheet.Workbook.Open($Path)
        $name = Split-Path -Path $Path -Leaf
        Write-Progress -Activity 'Converting' -Status $name
-       $doc.Converter()
        $doc.SaveAs([ref]([string]$PathOut),[ref]16)
        $excelsheet.ActiveWorkbook.Close()
    
