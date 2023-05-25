@@ -1,3 +1,11 @@
+<# PowerShell can turn regular folders into ISO files. ISO files are binary files that can be mounted and then behave like a read-only CD-ROM drive.
+
+In the past, ISO files were commonly used to mount installation media. Today, you can easily create your own ISO files created from your own folders and files. This way, you could create a simple backup system, or share projects easily among colleagues. Since ISO files are just a single file, they can be easily shared, and since Windows mounts them via double-click and shows them inside Windows Explorer as a CDROM drive, you can immediately work with the data without the need to extract or unzip anything.
+
+In contrast to VHD image files, mounting ISO files does not require administrator privileges. Anyone can mount and use ISO files.
+
+Since there is no built-in cmdlet to convert a folder structure into an ISO file, you need to call the internal APIs yourself. The code below defines the new function New-IsoFile:
+ #>
 function New-IsoFile
 {
   param
@@ -89,3 +97,18 @@ $resultStream = $resultimage.ImageStream
 [CustomConverter.Helper]::WriteStreamToFile($resultStream, $NewIsoFilePath)
 Write-Host 'DONE.' -ForegroundColor Green
 }
+
+
+<# Once you run this code, you now have a new cmdlet named "New-IsoFile". Creating a ISO file from an existing folder structure now is a piece of cake - just make sure the source file path exists:
+
+ 
+PS> New-IsoFile -NewIsoFilePath $env:temp\MyTest.iso -ImageName Holiday -SourceFilePath 'C:\HolidayPics'  
+ 
+You are rewarded by a new ISO file located in your temp folder (or whichever file path you specified). If you followed the example, simply open the temp folder:
+
+ 
+PS> explorer /select,$env:temp\MyTest.iso 
+ 
+When you double-click the ISO file in Windows Explorer, the image is mounted as a new CD ROM drive, and you can immediately see the copy of the data stored in your image file.
+
+Right-clicking the new CD-ROM drive in Windows Explorer and choosing "Eject" from context menu will dismount the drive again. #>
